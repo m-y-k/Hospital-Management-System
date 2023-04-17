@@ -2,7 +2,9 @@ package com.example.hospital.management.system;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 public class PatientController {
@@ -38,5 +40,46 @@ public class PatientController {
         Patient patient = patientHashMap.get(patientId);
 
         return patient;
+    }
+
+    @GetMapping("/getAllPatients")
+    public List<Patient> getAllPatients() {
+
+        List<Patient> patients = new ArrayList<>();
+
+        for (Patient patient : patientHashMap.values()) {
+
+            patients.add(patient);
+        }
+
+        return patients;
+    }
+
+    @GetMapping("/getPatientByName")
+    public Patient getPatientByName(@RequestParam("name") String name) {
+
+        for (Patient patient : patientHashMap.values()) {
+
+            if (patient.getName().equals(name)) {
+                return patient;
+            }
+        }
+
+        return null;
+    }
+
+    @GetMapping("getPatientsListGreaterThanAge")
+    public List<Patient> getPatientsListGreaterThanAge(@RequestParam("age") Integer age) {
+
+        List<Patient> patients = new ArrayList<>();
+
+        for (Patient patient : patientHashMap.values()) {
+
+            if (patient.getAge() > age) {
+                patients.add(patient);
+            }
+        }
+
+        return patients;
     }
 }
