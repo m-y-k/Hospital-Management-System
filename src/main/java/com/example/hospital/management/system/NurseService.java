@@ -52,4 +52,27 @@ public class NurseService {
         }
         return nurseList;
     }
+
+    public String updateNurse(Nurse nurse) {
+
+        String message = nurseRepository.updateNurse(nurse);
+        return message;
+    }
+
+    public String updateNurseQualification(Integer nurseId, String qualification) {
+
+        Nurse nurse = nurseRepository.getNurse(nurseId);
+
+        if (nurse.equals(null) == false) {
+
+            // update nurse qualification
+            nurse.setQualification(qualification);
+
+            String message = updateNurse(nurse);
+            return "nurse qualification updated";
+        }
+        else {
+            return "nurse not found";
+        }
+    }
 }

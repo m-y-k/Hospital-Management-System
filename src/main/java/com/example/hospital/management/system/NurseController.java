@@ -16,6 +16,30 @@ public class NurseController {
         return message;
     }
 
+    @PostMapping("/addViaParameters")
+    public String addNurseByParameters(@RequestParam("nurseId") Integer nurseId,
+                                       @RequestParam("name") String name,
+                                       @RequestParam("qualification") String qualification,
+                                       @RequestParam("age") Integer age) {
+
+        Nurse nurse = new Nurse(nurseId, name, qualification, age);
+
+        String message = addNurse(nurse);
+        return message;
+    }
+
+    @PostMapping("/addViaPathVariable/{nurseId}/{name}/{qualification}/{age}")
+    public String addNurseByPathVariables(@PathVariable("nurseId") Integer nurseId,
+                                          @PathVariable("qualification") String qualification,
+                                          @PathVariable("name") String name,
+                                          @PathVariable("age") Integer age) {
+
+        Nurse nurse = new Nurse(nurseId, name, qualification, age);
+
+        String message = addNurse(nurse);
+        return message;
+    }
+
     @GetMapping("/getAll")
     public List<Nurse> getNurse() {
 
@@ -36,4 +60,28 @@ public class NurseController {
         List<Nurse> nurses = nurseService.getNurseByQualification(qualification);
         return nurses;
     }
+
+    @PutMapping("/update")
+    public String updateNurse(@RequestBody Nurse nurse) {
+
+        String message = nurseService.updateNurse(nurse);
+        return message;
+    }
+
+    @PutMapping("/updateQualification")
+    public String updateNurseQualification(@RequestParam("nurseId") Integer nurseId,
+                                           @RequestParam("qualification") String qualification) {
+
+        String message = nurseService.updateNurseQualification(nurseId, qualification);
+        return message;
+    }
+
+    @PutMapping("/updateQualification/{nurseId}/{qualification}")
+    public String updateNurseQualificationByPathVariable(@PathVariable("nurseId") Integer nurseId,
+                                           @PathVariable("qualification") String qualification) {
+
+        String message = updateNurseQualification(nurseId, qualification);
+        return message;
+    }
+
 }
