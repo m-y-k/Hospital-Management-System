@@ -1,11 +1,11 @@
-package com.example.hospital.management.system;
+package com.example.hospital.management.system.controllers;
 
+import com.example.hospital.management.system.models.Patient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.SimpleTimeZone;
 
 @RestController
 @RequestMapping("/patient")

@@ -1,5 +1,6 @@
-package com.example.hospital.management.system;
+package com.example.hospital.management.system.controllers;
 
+import com.example.hospital.management.system.models.Doctor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;

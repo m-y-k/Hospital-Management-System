@@ -1,5 +1,7 @@
-package com.example.hospital.management.system;
+package com.example.hospital.management.system.controllers;
 
+import com.example.hospital.management.system.models.Nurse;
+import com.example.hospital.management.system.services.NurseService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -68,6 +70,13 @@ public class NurseController {
         return message;
     }
 
+    @PutMapping("/updateName")
+    public String updateNurseName(@RequestParam("nurseId") Integer nurseId,
+                                  @RequestParam("name") String name) {
+
+        return nurseService.updateNurseName(nurseId, name);
+    }
+
     @PutMapping("/updateQualification")
     public String updateNurseQualification(@RequestParam("nurseId") Integer nurseId,
                                            @RequestParam("qualification") String qualification) {
@@ -80,8 +89,19 @@ public class NurseController {
     public String updateNurseQualificationByPathVariable(@PathVariable("nurseId") Integer nurseId,
                                            @PathVariable("qualification") String qualification) {
 
-        String message = updateNurseQualification(nurseId, qualification);
+        String message = nurseService.updateNurseQualification(nurseId, qualification);
         return message;
     }
 
+    @DeleteMapping("/delete")
+    public String deleteNurse(@RequestParam("nurseId") Integer nurseId) {
+
+        return nurseService.deleteNurse(nurseId);
+    }
+
+    @DeleteMapping("/deleteViaAge")
+    public String deleteNurseByAge(@RequestParam("age") Integer age) {
+
+        return nurseService.deleteNurseByAge(age);
+    }
 }

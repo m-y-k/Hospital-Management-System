@@ -1,5 +1,7 @@
-package com.example.hospital.management.system;
+package com.example.hospital.management.system.services;
 
+import com.example.hospital.management.system.models.Nurse;
+import com.example.hospital.management.system.repositories.NurseRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -59,6 +61,11 @@ public class NurseService {
         return message;
     }
 
+    public String updateNurseName(Integer nurseId, String name) {
+
+        return nurseRepository.updateNurseName(nurseId, name);
+    }
+
     public String updateNurseQualification(Integer nurseId, String qualification) {
 
         Nurse nurse = nurseRepository.getNurse(nurseId);
@@ -69,10 +76,21 @@ public class NurseService {
             nurse.setQualification(qualification);
 
             String message = updateNurse(nurse);
-            return "nurse qualification updated";
+            return message;
         }
         else {
             return "nurse not found";
         }
     }
+
+    public String deleteNurse(Integer nurseId) {
+
+        return nurseRepository.deleteNurse(nurseId);
+    }
+
+    public String deleteNurseByAge(Integer age) {
+
+        return nurseRepository.deleteNurseByAge(age);
+    }
+
 }
